@@ -82,7 +82,7 @@ public class HoconConfigTypeManager {
      * @param type The configuration type.
      * @return The HoconConfigManager instance associated with the type.
      */
-    private HoconConfigManager getHoconConfigManager(String type) {
+    public HoconConfigManager getHoconConfigManager(String type) {
         HoconConfigManager manager = managerMap.get(type);
 
         if (manager == null) {

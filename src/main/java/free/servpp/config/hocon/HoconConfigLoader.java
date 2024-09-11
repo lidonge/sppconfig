@@ -2,7 +2,6 @@ package free.servpp.config.hocon;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
-import free.servpp.config.IConfigurable;
 import free.servpp.config.IConfigurableForLoad;
 
 import java.io.File;
@@ -32,8 +31,8 @@ public class HoconConfigLoader {
      * Constructs a HoconConfigLoader with the specified configuration file extension, resources directory, and builder.
      *
      * @param configFileExtension the file extension for configuration files
-     * @param resourcesDir the directory from which to load configuration files
-     * @param builder the builder for creating configurable objects
+     * @param resourcesDir        the directory from which to load configuration files
+     * @param builder             the builder for creating configurable objects
      * @throws IOException if an error occurs while loading the configuration files
      */
     public HoconConfigLoader(String configFileExtension, String resourcesDir, IConfigurableBuilder builder) throws IOException {
@@ -78,7 +77,7 @@ public class HoconConfigLoader {
      * Adds configurations to the list based on their modifiers.
      *
      * @param value the list of configurations to process
-     * @param type the type of configuration
+     * @param type  the type of configuration
      * @param confs the list to which valid configurations will be added
      */
     private void addConfigByModifiersToList(List<Config> value, String type, List<Config> confs) {
@@ -121,7 +120,7 @@ public class HoconConfigLoader {
      * Adds configurations to the list based on their IDs.
      *
      * @param value the list of configurations to process
-     * @param type the type of configuration
+     * @param type  the type of configuration
      * @param confs the list to which valid configurations will be added
      */
     private void addConfigByIdsToList(List<Config> value, String type, List<Config> confs) {
@@ -185,7 +184,7 @@ public class HoconConfigLoader {
      * Loads configuration files from a specific resource directory.
      *
      * @param resourceDir the directory from which to load configuration files
-     * @param configs the list to which loaded configurations will be added
+     * @param configs     the list to which loaded configurations will be added
      * @throws IOException if an error occurs while loading the configuration files
      */
     private void loadConfigsFromResourceDirectory(String resourceDir, List<Config> configs) throws IOException {
@@ -205,7 +204,7 @@ public class HoconConfigLoader {
     /**
      * Loads configuration files from the file system.
      *
-     * @param url the URL pointing to the resources directory
+     * @param url     the URL pointing to the resources directory
      * @param configs the list to which loaded configurations will be added
      * @throws IOException if an error occurs while loading the configuration files
      */
@@ -234,9 +233,9 @@ public class HoconConfigLoader {
     /**
      * Loads configuration files from a JAR file.
      *
-     * @param jarUrl the URL pointing to the JAR file
+     * @param jarUrl      the URL pointing to the JAR file
      * @param resourceDir the directory within the JAR from which to load configuration files
-     * @param configs the list to which loaded configurations will be added
+     * @param configs     the list to which loaded configurations will be added
      * @throws IOException if an error occurs while loading the configuration files
      */
     private void loadConfigsFromJar(URL jarUrl, String resourceDir, List<Config> configs) throws IOException {
@@ -258,7 +257,7 @@ public class HoconConfigLoader {
     /**
      * Loads a single configuration file and adds it to the provided list.
      *
-     * @param file the configuration file to load
+     * @param file    the configuration file to load
      * @param configs the list to which the loaded configuration will be added
      */
     private void loadConfigFile(File file, List<Config> configs) {
