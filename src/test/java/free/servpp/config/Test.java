@@ -78,6 +78,7 @@ public class Test {
                 return null;
             }
         });
+        loader.load();
         HoconConfigTypeManager manager = loader.getManager();
         manager = manager;
     }

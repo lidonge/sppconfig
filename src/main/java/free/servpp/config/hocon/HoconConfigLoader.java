@@ -35,12 +35,11 @@ public class HoconConfigLoader {
      * @param builder             the builder for creating configurable objects
      * @throws IOException if an error occurs while loading the configuration files
      */
-    public HoconConfigLoader(String configFileExtension, String resourcesDir, IConfigurableBuilder builder) throws IOException {
+    public HoconConfigLoader(String configFileExtension, String resourcesDir, IConfigurableBuilder builder) {
         this.configFileExtension = configFileExtension;
         this.resourcesDir = resourcesDir;
         this.builder = builder;
         manager = new HoconConfigTypeManager().setBuilder(builder);
-        load();
     }
 
     /**
@@ -52,15 +51,23 @@ public class HoconConfigLoader {
         return manager;
     }
 
+    public void load(File file) throws IOException {
+        List<Config> mergedConfig = loadConfigsFromFile(file);
+        handleConfigs(mergedConfig);
+    }
     /**
      * Loads configuration files from the specified resources directory,
      * groups them by their root keys, and adds them to the manager.
      *
      * @throws IOException if an error occurs while loading the configuration files
      */
-    private void load() throws IOException {
+    public void load() throws IOException {
         // Load all .conf files from the resources directory and its subdirectories
         List<Config> mergedConfig = loadConfigsFromResources(resourcesDir);
+        handleConfigs(mergedConfig);
+    }
+
+    private void handleConfigs(List<Config> mergedConfig) {
         Map<String, List<Config>> groupedByConfig = groupByRoot(mergedConfig);
         for (Map.Entry<String, List<Config>> entry : groupedByConfig.entrySet()) {
             String type = entry.getKey();
@@ -177,6 +184,11 @@ public class HoconConfigLoader {
     public List<Config> loadConfigsFromResources(String resourceDir) throws IOException {
         List<Config> configs = new ArrayList<>();
         loadConfigsFromResourceDirectory(resourceDir, configs);
+        return configs;
+    }
+    public List<Config> loadConfigsFromFile(File file) throws IOException {
+        List<Config> configs = new ArrayList<>();
+        loadConfigsFromFileSystem(file.toURL(),configs);
         return configs;
     }
 
